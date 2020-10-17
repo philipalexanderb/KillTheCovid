@@ -1,0 +1,44 @@
+insert A x 0
+insert C A 1
+insert Z A 3
+insert Y Z 2
+insert X Z 3
+insert V X 2
+insert W Y 2
+insert S W 1
+insert E S 0
+
+
+insert A x 0
+insert C A 1
+insert Z A 3
+insert Y Z 2
+insert X Z 3
+insert V Y 3
+insert W V 1
+insert S W 1
+insert E S 0
+
+
+insert A x 0
+insert C A 1
+insert Z A 3
+insert Y Z 2
+insert X Z 3
+insert V X 2
+insert W V 1
+insert S W 1
+insert E S 0
+
+
+insert A x 0
+insert C A 1
+insert Z A 3
+insert Y Z 2
+insert X Z 3
+insert V Y 3
+insert W Y 2
+insert S W 1
+insert E S 0
+
+
