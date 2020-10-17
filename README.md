@@ -25,8 +25,8 @@ Anywhr Coding Challenge
 		"query Y" will yield: "Here are the neighbours for Y: [2, W] [3, V] [4, X] [5, Z]"
 
 2. Inserting a hexagon into the array of hexagons:
-	"insert X Y B" where X is the new hexagon to be inserted
-			     Y is the neighbouring hexagon to which the new hexagon is attached to
+	"insert X Y B" where X is the new hexagon to be inserted,
+			     Y is the neighbouring hexagon to which the new hexagon is attached to,
 			     B is the border on hexagon Y
 	
 	Example usage:
