@@ -1,6 +1,6 @@
 # KillTheCovid
 Anywhr Coding Challenge
-##Instructions:
+## Instructions:
 1. Go into the folder directory and compile the class using the following command: 
 	"javac KillTheCovid.java"
 
@@ -11,8 +11,8 @@ Anywhr Coding Challenge
 
 4. Subsequent interactions will be done from the command line (System input)
 
+## Types of queries:
 
-##Types of queries:
 1. Querying the neighbours of a particular hexagon:
 	"query A" where A is the hexagon of interest.
 	
@@ -52,10 +52,10 @@ Anywhr Coding Challenge
 	"quit"
 
 
-Features:
+## Features:
 1. all the name for hexagons will be converted to uppercase
 2. instructions can consist of lower or upper case characters
 
-Limit:
+## Limit:
 1. queries must be of the exact format as given above, otherwise, program may not run as expected and may not terminate.
 2. Invalid queries such as "inser A B 3", "quer 2", "rm 5" will result in program termination.
