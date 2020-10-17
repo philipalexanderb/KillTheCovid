@@ -1,5 +1,6 @@
 # KillTheCovid
 Anywhr Coding Challenge
+##Instructions:
 1. Go into the folder directory and compile the class using the following command: 
 	"javac KillTheCovid.java"
 
@@ -11,7 +12,7 @@ Anywhr Coding Challenge
 4. Subsequent interactions will be done from the command line (System input)
 
 
-Types of queries:
+##Types of queries:
 1. Querying the neighbours of a particular hexagon:
 	"query A" where A is the hexagon of interest.
 	
@@ -25,9 +26,7 @@ Types of queries:
 
 2. Inserting a hexagon into the array of hexagons:
 	"insert X Y B" where X is the new hexagon to be inserted
-	
 			     Y is the neighbouring hexagon to which the new hexagon is attached to
-			     
 			     B is the border on hexagon Y
 	
 	Example usage:
