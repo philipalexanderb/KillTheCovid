@@ -190,6 +190,7 @@ public class KillTheCovid {
         
         boolean check = false;
 
+        //Check it this hexagon is a "connecting" hexagon between its neighbouring hexagons. if it is, check = true
         for (int i = 0; i < 6; i++) {
             if (count == 1) {
                 break;
@@ -216,7 +217,8 @@ public class KillTheCovid {
                 arr_neigh.get(curr_ind)[neighbourIndex(i)] = null;
             }
         }
-        
+
+        //given that the hexagon is a "connecting" hexagon, check if its removal results in disconnected array, if it does checkByDFS will return false.
         if (check && !checkByDFS(arr_neigh)) {
             System.out.println("Sorry this neighbour cannot be removed as it will result in 2 disconnected arrays of hexagons");
             for (int i = 0; i < 6; i++) {
