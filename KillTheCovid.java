@@ -25,11 +25,12 @@ public class KillTheCovid {
                     String[] neighs = map_neigh.get(new_hex);
                     for (int i = 0; i < 6; i++) {
                         if (neighs[i] != null) {
-                            System.out.print(neighs[i] + " ");
+                            System.out.print("[" + i + ", " + neighs[i] + "] ");
                         }
                     }
-                    System.out.println("Initialization Complete");
+                    System.out.println();
                 }
+                System.out.println("Initialization Complete");
             } catch (Exception e) {
                 System.err.println(e);
             }
@@ -40,13 +41,17 @@ public class KillTheCovid {
 
         while (!instruction.equals("quit")) {
             if (instruction.equals("query")) {
+                String hex = sc.next();
                 if (map_neigh.isEmpty()) {
-                    sc.nextInt();
                     System.out.println("Invalid query, please initialize you hexagons by typing `insert initial_hex x 0`");
                     instruction = sc.next().toLowerCase();
                     continue;
+                } else if (map_neigh.get(hex) == null || map_neigh.get(hex).length == 0 ) {
+                    System.out.println("Invalid query, " + hex + " does not exist or it has been removed");
+                    instruction = sc.next().toLowerCase();
+                    continue;
                 }
-                String hex = sc.next().toUpperCase();
+                hex = hex.toUpperCase();
                 String[] neighs = map_neigh.get(hex);
                 System.out.print("Here are the neighbours for " + hex + ": ");
                 for (int i = 0; i < 6; i++) {
@@ -175,7 +180,23 @@ public class KillTheCovid {
     }
 
     static void remove (String hex, HashMap<String, String[]> arr_neigh, myDoubleHashMap arr_dist) {
+        
         String[] neighbours = arr_neigh.get(hex);
+        
+        for (int i = 0; i < 6; i++) {
+            if (neighbours[i] != null) {
+                boolean check = neighbours[(i+1)%6] == null 
+                    && neighbours[(i+5)%6] == null 
+                    && (neighbours[(i+2)%6] == null ||
+                    neighbours[(i+3)%6] == null ||
+                    neighbours[(i+4)%6] == null); 
+                if (check) {
+                    System.out.println("Sorry this neighbour cannot be removed as it will result in 2 separate arrays of hexagons");
+                    return;
+                }
+            }
+        }
+
         arr_neigh.remove(hex);
         arr_dist.removeFromKey(hex);
 
@@ -189,6 +210,7 @@ public class KillTheCovid {
                 arr_neigh.get(curr_ind)[neighbourIndex(i)] = null;
             }
         }
+
         System.out.println();
     }
 }
