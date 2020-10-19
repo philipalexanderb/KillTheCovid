@@ -36,7 +36,6 @@ public class KillTheCovid {
             }
         }
 
-
         String instruction = sc.next().toLowerCase();
 
         while (!instruction.equals("quit")) {
@@ -182,17 +181,26 @@ public class KillTheCovid {
     static void remove (String hex, HashMap<String, String[]> arr_neigh, myDoubleHashMap arr_dist) {
         
         String[] neighbours = arr_neigh.get(hex);
-        
+        int count = 0;
         for (int i = 0; i < 6; i++) {
             if (neighbours[i] != null) {
-                boolean check = neighbours[(i+1)%6] == null 
+                count++;
+            }
+        }
+        
+        boolean check = false;
+
+        for (int i = 0; i < 6; i++) {
+            if (count == 1) {
+                break;
+            } else if (neighbours[i] != null) {
+                check = neighbours[(i+1)%6] == null 
                     && neighbours[(i+5)%6] == null 
                     && (neighbours[(i+2)%6] == null ||
                     neighbours[(i+3)%6] == null ||
                     neighbours[(i+4)%6] == null); 
                 if (check) {
-                    System.out.println("Sorry this neighbour cannot be removed as it will result in 2 separate arrays of hexagons");
-                    return;
+                    break;
                 }
             }
         }
@@ -202,18 +210,65 @@ public class KillTheCovid {
 
         // removing hex from each of his neighbours
         String curr_ind;
+        for (int i = 0; i < 6; i++) {
+            curr_ind = neighbours[i];
+            if (curr_ind != null) {
+                arr_neigh.get(curr_ind)[neighbourIndex(i)] = null;
+            }
+        }
+        
+        if (check && !checkByDFS(arr_neigh)) {
+            System.out.println("Sorry this neighbour cannot be removed as it will result in 2 disconnected arrays of hexagons");
+            for (int i = 0; i < 6; i++) {
+                if (neighbours[i] != null) {
+                    insert(hex, neighbours[i], neighbourIndex(i), arr_neigh, arr_dist);
+                    return;
+                }
+            }
+        }
+
         System.out.print(hex + " has been removed from: ");
         for (int i = 0; i < 6; i++) {
             curr_ind = neighbours[i];
             if (curr_ind != null) {
                 System.out.print("[" + curr_ind + ", " + neighbourIndex(i) + "] ");
-                arr_neigh.get(curr_ind)[neighbourIndex(i)] = null;
             }
         }
 
         System.out.println();
     }
+
+    static boolean checkByDFS (HashMap<String, String[]> arr_neigh) {
+        HashMap<String, Boolean> visited = new HashMap<String, Boolean>();
+        Set keys = arr_neigh.keySet();
+        Iterator iterator = keys.iterator();
+        while (iterator.hasNext()) {
+            visited.put((String)iterator.next(), false);
+        }
+
+        Iterator i = keys.iterator();
+        Queue<String> q = new LinkedList<String>();
+        q.offer((String)i.next());
+        int count = 0;
+        while (!q.isEmpty()) {
+            String hex = q.poll();
+            if (!visited.get(hex)) {
+                count++;
+                visited.replace(hex, true);
+                String[] neighbours = arr_neigh.get(hex);
+                for (int j = 0; j < 6; j++) {
+                    if (neighbours[j] != null) {
+                        q.offer(neighbours[j]);
+                    }
+                }
+            }
+        }
+
+        return count == arr_neigh.size();
+    }
 }
+
+
 
 //In each of the smaller equilateral triangle, take the length of the sides as 1000 and the height of triangle as (sqrt(3)/2*10)*100 = 866
 class pos {
